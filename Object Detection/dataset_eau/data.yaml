@@ -1,0 +1,8 @@
+names:
+  0: fish
+path: /Users/eugeniedecaux/Desktop/PDS_mac/dataset_eau
+train: images/train
+val: images/train  # même dossier, YOLO fera un split auto
+
+# Split ratio (optionnel, par défaut 80/20)
+# split: 0.2  # 20% pour validation
