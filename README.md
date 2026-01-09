@@ -77,10 +77,9 @@ The repository contains a complete pipeline for:
 ## Quick Start
 
 ### 1. Installation
-Clone the repository and install dependencies:
+Clone the repository
 ```bash
 git clone https://github.com/edecaux/imaj_assignment.git
-cd imaj_assignment
 ```
 
 ### 2. Running Specific Modules
@@ -99,9 +98,6 @@ python "Color Quantization/run_color_quant_database.py"
 # Open training notebook
 jupyter notebook object_detection.ipynb
 
-# Download pre-trained YOLOv5 (if not included)
-wget https://github.com/ultralytics/yolov5/releases/download/v7.0/yolov5s.pt
-
 # Train on custom dataset (requires dataset_eau/)
 yolo task=detect mode=train model=yolov5s.pt data=dataset_eau/data.yaml epochs=100
 
@@ -114,7 +110,7 @@ yolo task=detect mode=predict model=runs/detect/train/weights/best.pt source=pat
 jupyter notebook image_captioning.ipynb
 ```
 **Note**: This notebook requires API keys:
-- **EPFL RCP Portal** access (`IMAJLLAMA` key)
+- **EPFL RCP Portal** access (`IMAJLLAMA` key) to request
 - **HuggingFace** token (`HF_TOKEN`)
 
 
@@ -123,8 +119,8 @@ jupyter notebook image_captioning.ipynb
 streamlit run interactive_plot.py
 ```
 **Requirements**: 
-- `filtered_database.csv` must be present in the root directory
-- Database contains pre-extracted features (colors, metadata, object counts)
+- `final_database.csv` must be present in the root directory
+- Database contains extracted features (colors, metadata)
 
 ### 3. Data Files
 
@@ -133,11 +129,11 @@ The following files are included in the repository:
 - `dataset_eau/`: Annotated training set for object detection (water-themed drawings)
 - `runs/detect/train/weights/`: Pre-trained YOLOv5 checkpoints
 
-**Full dataset** is stored separately.
+**Full dataset** is stored separately on an SSD card and on the SSH server.
 
 ## Workflow Summary
 
 ```
-Raw Images → Outlier Removal → Standardization → Color Quantization → filtered_database.csv
+Raw Images -> Statistical analysis -> Outlier Removal -> Standardization -> Color Quantization -> final_database.csv
                                                       
 ```
