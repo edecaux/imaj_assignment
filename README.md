@@ -36,7 +36,7 @@ The repository contains a complete pipeline for:
 - **Web App**: `Streamlit`
 - **Infrastructure**: Remote server (SSH), EPFL RCP Portal, Local computer
 
-## 📁 Repository Structure
+## Repository Structure
 ```text
 ├── Color Quantization/          # Color analysis and quantization
 │   ├── color_quantization.ipynb # Notebook for color quantization experiments
