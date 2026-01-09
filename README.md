@@ -29,12 +29,12 @@ The repository contains a complete pipeline for:
 - **Centralized Database**: All extracted features (colors, objects, metadata) are stored in a standardized CSV format.
 - **Streamlit Interface**: A web-based GUI to interactively filter and visualize image distributions (e.g., height distribution by year).
 
-## Tech Stack
+## Technical informations
 - **Languages**: Python
-- **Libraries**: `scikit-learn`, `scikit-image`, `opencv-python`, `pillow`, `pandas`, `numpy`
+- **Main Libraries**: `scikit-learn`, `scikit-image`, `opencv-python`, `pillow`, `pandas`, `numpy`
 - **Vision Models**: `YOLOv5`, `Llama-4` (multimodal experiments)
 - **Web App**: `Streamlit`
-- **Infrastructure**: Remote server (SSH), EPFL RCP Portal (GPU acceleration)
+- **Infrastructure**: Remote server (SSH), EPFL RCP Portal, Local computer
 
 ## Repository Structure
 ```text
