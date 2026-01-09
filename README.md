@@ -1,4 +1,4 @@
-# Large-Scale Machine Learning–Based Image Analysis of UNESCO/IMAJ Children’s Drawings
+# Large-Scale Machine Learning–Based Image Analysis of UNESCO/IMAJ Children's Drawings
 
 This project was developed as a **Semester Project** at the **EPFL Center for Imaging** in collaboration with **IMAJ** (Institut Mondial des Arts de la Jeunesse). 
 
@@ -29,14 +29,14 @@ The repository contains a complete pipeline for:
 - **Centralized Database**: All extracted features (colors, objects, metadata) are stored in a standardized CSV format.
 - **Streamlit Interface**: A web-based GUI to interactively filter and visualize image distributions (e.g., height distribution by year).
 
-## Technical informations
+## Technical Information
 - **Languages**: Python
 - **Main Libraries**: `scikit-learn`, `scikit-image`, `opencv-python`, `pillow`, `pandas`, `numpy`
 - **Vision Models**: `YOLOv5`, `Llama-4` (multimodal experiments)
 - **Web App**: `Streamlit`
 - **Infrastructure**: Remote server (SSH), EPFL RCP Portal, Local computer
 
-## Repository Structure
+## 📁 Repository Structure
 ```text
 ├── Color Quantization/          # Color analysis and quantization
 │   ├── color_quantization.ipynb # Notebook for color quantization experiments
@@ -63,3 +63,81 @@ The repository contains a complete pipeline for:
 ├── spatial_segementation.ipynb  # Spatial segmentation experiments
 ├── yolov5s.pt                   # Pre-trained YOLOv5 base model
 └── README.md
+```
+
+## Important Notes
+
+**Modular Design**: All notebooks and scripts are designed to run **independently**. You can execute any module without running the entire pipeline.
+
+**Execution Status**: Some notebook cells were intentionally not executed due to:
+- Long computation times (batch processing of 100K+ images)
+- Hardware requirements (GPU for model training)
+- External dependencies (API keys, remote datasets)
+
+## Quick Start
+
+### 1. Installation
+Clone the repository and install dependencies:
+```bash
+git clone https://github.com/edecaux/imaj_assignment.git
+cd imaj_assignment
+```
+
+### 2. Running Specific Modules
+
+#### **Color Analysis**
+```bash
+# Interactive exploration
+jupyter notebook "Color Quantization/color_quantization.ipynb"
+
+# Batch processing (requires full dataset)
+python "Color Quantization/run_color_quant_database.py"
+```
+
+#### **Object Detection with YOLOv5**
+```bash
+# Open training notebook
+jupyter notebook object_detection.ipynb
+
+# Download pre-trained YOLOv5 (if not included)
+wget https://github.com/ultralytics/yolov5/releases/download/v7.0/yolov5s.pt
+
+# Train on custom dataset (requires dataset_eau/)
+yolo task=detect mode=train model=yolov5s.pt data=dataset_eau/data.yaml epochs=100
+
+# Run inference on test images
+yolo task=detect mode=predict model=runs/detect/train/weights/best.pt source=path/to/images
+```
+
+#### **Image Captioning with LLMs**
+```bash
+jupyter notebook image_captioning.ipynb
+```
+**Note**: This notebook requires API keys:
+- **EPFL RCP Portal** access (`IMAJLLAMA` key)
+- **HuggingFace** token (`HF_TOKEN`)
+
+
+#### **Interactive Visualization Tool**
+```bash
+streamlit run interactive_plot.py
+```
+**Requirements**: 
+- `filtered_database.csv` must be present in the root directory
+- Database contains pre-extracted features (colors, metadata, object counts)
+
+### 3. Data Files
+
+The following files are included in the repository:
+- `filtered_database.csv`: Curated metadata (105,816 entries)
+- `dataset_eau/`: Annotated training set for object detection (water-themed drawings)
+- `runs/detect/train/weights/`: Pre-trained YOLOv5 checkpoints
+
+**Full dataset** is stored separately.
+
+## Workflow Summary
+
+```
+Raw Images → Outlier Removal → Standardization → Color Quantization → filtered_database.csv
+                                                      
+```
